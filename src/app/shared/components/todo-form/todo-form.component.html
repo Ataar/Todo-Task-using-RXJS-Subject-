@@ -1,0 +1,53 @@
+
+
+<div class="card">
+<div class="card-body">
+        
+
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+<label for="text">Todo Form</label>
+<input type="text" class="form-control" formControlName="todoItem" id="todoItem">
+</div>
+
+<!-- Add Button -->
+<button
+  *ngIf="!isEdit"
+  mat-raised-button
+  color="primary"
+  type="button"
+  (click)="onSubmit()"
+  [disabled]="todoForm.invalid">
+  Add Todo
+</button>
+
+<!-- Update Button -->
+<button
+  *ngIf="isEdit"
+  mat-raised-button
+  color="accent"
+  type="button"
+  (click)="OnUpdate()"
+  [disabled]="todoForm.invalid">
+  Update Todo
+</button>
+
+<!-- Cancel Button -->
+<button class="ml-4"
+  *ngIf="isEdit"
+  mat-raised-button
+  color="primary"
+  type="button"
+  (click)="onCancel()">
+  Cancel
+</button>
+
+
+
+<!-- <button mat-raised-button [color]="isEdit ? 'accent' : 'primary'">
+  {{ isEdit ? 'Update Todo' : 'Add Todo' }}
+</button> -->
+
+</form>
+</div>
+</div>

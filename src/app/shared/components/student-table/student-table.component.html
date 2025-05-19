@@ -1,0 +1,34 @@
+
+<div class="table-responsive">
+<table class="table table-bordered">
+ <thead>
+ <tr>
+  <th>SR No</th>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Contact</th>
+  <th>Qualification</th>
+  <th>Edit</th>
+  <th>Delete</th>
+ </tr>
+ 
+ </thead> 
+
+  <tbody>
+    <tr *ngFor="let std of stdData; let i = index">
+     <td>{{i+1}}</td>
+     <td>{{std.name}}</td>
+     <td>{{std.email}}</td>
+     <td>{{std.contact}}</td>
+     <td>{{std.qualification}}</td>
+     <td><button mat-raised-button color="primary"(click)="onEdit(std)" matTooltip="Edit">
+    <mat-icon>edit</mat-icon>
+     </button></td>
+     <td><button mat-raised-button color="warn"  (click)="onDelete(std.todoId)">
+          <mat-icon>delete</mat-icon>
+     </button></td>
+     
+    </tr>
+  </tbody>
+</table>
+</div>

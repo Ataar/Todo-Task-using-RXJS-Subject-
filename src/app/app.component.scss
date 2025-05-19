@@ -1,0 +1,16 @@
+
+
+.heading
+{
+    font-family:georgia;
+}
+
+
+@media(min-width:320px) and (max-width:425px)
+{
+    .col-md-8 
+    {
+        margin-top: 25px;
+    }
+}
+
