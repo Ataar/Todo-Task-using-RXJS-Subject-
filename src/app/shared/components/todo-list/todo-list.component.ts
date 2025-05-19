@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Itodo } from '../../module/todo';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -27,14 +28,25 @@ export class TodoListComponent implements OnInit {
       this.todoService.editTodo$.next(todo) 
    }
 
+//   onDelete(todoId: string): void {
+//   const confirmDelete = confirm('Are you sure you want to delete this todo?');
+//   if (confirmDelete) {
+//     this.todoService.deleteTodo(todoId);
+//     this.todoData = this.todoService.fetchAllTododata();
+//   }
+// }
+
   onDelete(todoId: string): void {
-  const confirmDelete = confirm('Are you sure you want to delete this todo?');
-  if (confirmDelete) {
-    this.todoService.deleteTodo(todoId);
-    this.todoData = this.todoService.fetchAllTododata();
-  }
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: { message: 'Are you sure you want to delete this Item?' }
+      });
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.todoService.deleteTodo(todoId);
+        this.todoData = this.todoService.fetchAllTododata();
+      }
+});
 }
 
 }
-
-

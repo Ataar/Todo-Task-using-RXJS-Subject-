@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Itodo } from '../module/todo';
 import { Subject } from 'rxjs';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class TodoService {
 
   editTodo$: Subject<Itodo> = new Subject();
 
-  constructor() {}
+  constructor(private snackBar : SnackbarService) {}
 
   addTodoItem(todo: Itodo) {
     this.todoArr.push(todo);
@@ -32,6 +33,8 @@ export class TodoService {
       this.todoArr[getIndex] = updateTodo; // <-- update the array item
       localStorage.setItem('todoData', JSON.stringify(this.todoArr));
     }
+
+       this.snackBar.show('Updated Successfully')
   }
 
   deleteTodo(todoId: string): void {

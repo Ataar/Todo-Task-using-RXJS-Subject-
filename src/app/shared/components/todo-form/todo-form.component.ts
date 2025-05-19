@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Itodo } from '../../module/todo';
 import { TodoService } from '../../services/todo.service';
 import { UuidService } from '../../services/uuid.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-todo-form',
@@ -15,7 +16,8 @@ export class TodoFormComponent implements OnInit {
   isEdit : boolean = false;
   constructor( 
     private uuidService : UuidService,
-    private todoService : TodoService
+    private todoService : TodoService,
+    private snackBar : SnackbarService
   ) { } // here the instance of todo service is injected
   // for getting id
 
@@ -37,20 +39,18 @@ export class TodoFormComponent implements OnInit {
      })
     } 
 
+
 onSubmit()
 {
   if(this.todoForm.valid)
   {
    
     let todoItem : Itodo = {...this.todoForm.value , todoId : this.uuidService.uuid()};
-
-
+    //  console.log(todoItem);
+     this.snackBar.show('Added SuccessFully')
     this.todoForm.reset()
 
-   this.todoService.addTodoItem(todoItem)
-
-    
-    
+   this.todoService.addTodoItem(todoItem)  
   }
 }
 
